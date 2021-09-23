@@ -24,7 +24,7 @@ const Cart = () => {
               >
                 <div className="p-2 w-12">
                   <img
-                    src="https://www.nicepng.com/png/detail/695-6953710_botella-de-vino-png.png"
+                    src={e.img}
                     alt="img product"
                   />
                 </div>

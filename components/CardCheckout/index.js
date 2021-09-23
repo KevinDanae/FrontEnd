@@ -22,7 +22,7 @@ const CardCheckout = ({ product }) => {
           <td className="hidden pb-4 md:table-cell">
             <a href="#">
               <img
-                src="https://www.nicepng.com/png/detail/695-6953710_botella-de-vino-png.png"
+                src={product.img}
                 className="w-12 rounded"
                 alt="Thumbnail"
               />

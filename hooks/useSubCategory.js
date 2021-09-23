@@ -4,7 +4,7 @@ const useSubCategory = () => {
   const [subCategories, setSubCategories] = useState([]);
 
   const request = async () => {
-    const data = await fetch("http://localhost:3001/subcategories");
+    const data = await fetch("https://wines-db.herokuapp.com/subcategories");
     const info = await data.json();
     setSubCategories(info);
   };

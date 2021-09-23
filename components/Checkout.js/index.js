@@ -151,7 +151,7 @@ const Checkout = ({ cart }) => {
                       Total
                     </div>
                     <div className="lg:px-4 lg:py-2 m-2 lg:text-lg font-bold text-center text-gray-900">
-                      ${total}
+                      ${total.toFixed(2)}
                     </div>
                   </div>
                   <a href="#">

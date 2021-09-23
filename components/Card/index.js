@@ -34,7 +34,7 @@ const Card = ({ price, name, img, discount, id }) => {
         <div className="flex">
           <button
             onClick={() => dispatch(addCart({ priceDis, name, img, id, q: 1 }))}
-            className="py-3 w-9/12 btn-primary rounded-bl-xl font-extrabold"
+            className="py-3 w-9/12 relative btn-primary rounded-bl-xl font-extrabold"
           >
             Add to cart
           </button>

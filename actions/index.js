@@ -1,5 +1,5 @@
 export const getProducts = () => async (dispatch) => {
-  const data = await fetch("http://localhost:3001/product");
+  const data = await fetch("https://wines-db.herokuapp.com/product");
   const info = await data.json();
 
   dispatch({
@@ -9,7 +9,7 @@ export const getProducts = () => async (dispatch) => {
 };
 
 export const getByName = (name) => async (dispatch) => {
-  const data = await fetch(`http://localhost:3001/product?name=${name}`);
+  const data = await fetch(`https://wines-db.herokuapp.com/product?name=${name}`);
   let info = await data.json();
   if (typeof info === "string") info = [];
 
