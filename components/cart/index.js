@@ -11,6 +11,7 @@ const Cart = () => {
   cart.map((e) => {
     total = total + e.q * e.priceDis;
   });
+  
 
   return (
     <>
