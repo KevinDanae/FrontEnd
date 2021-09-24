@@ -10,10 +10,8 @@ function Details() {
     const router = useRouter()
     const { Details } = router.query
     const { product } = useId(Details)
-
     return (
         <div>
-
             <Navbar />
             <div className="flex justify-evenly m-10">  {/*   flex justify-center */}
 
@@ -38,27 +36,13 @@ function Details() {
                                     q: 1,
                                 }))}>Add to cart</button>
                             </div>
-
-            <div className="flex w-full justify-center">
-                <div className="flex content-center card bordered w-96">
-                    <figure>
-                        <img src={product[0]?.picture}/>
-                    </figure>
-                    <div className="card-body">
-                        <h2 className="card-title"> {product[0]?.name}
-                            <div className="badge mx-2 badge-primary">Wine</div>
-                        </h2>
-                        <p>{product[0]?.description}</p>
-                        <p>Stock:{product[0]?.stock}</p>
-                        <div className="justify-center card-actions">
-                            <button className="btn btn-primary">Add to cart</button>
                         </div>
                     </div>
 
                 </div>
 
 
-                <div className="flex p-20">
+                <div className="flex p-5">
 
                     <div className="flex flex-col w-full justify-center align-middle">
                         <div className="grid h-20 card bg-red-100 rounded-box place-items-center">
