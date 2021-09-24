@@ -8,10 +8,12 @@ const useId = (id) => {
     const info = await data.json();
     setProducts(info);
   };
-  
+    console.log(product)
+
   useEffect(() => {
     request();
   }, []);
+
   return {
       product
   }

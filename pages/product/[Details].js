@@ -6,7 +6,7 @@ function Details() {
     const router = useRouter()
     const { Details } = router.query
     const { product } = useId(Details)
-    console.log(useId(Details))
+    console.log(Details)
     return (
 
         <div>
@@ -18,11 +18,11 @@ function Details() {
                         <img src={product[0]?.picture}/>
                     </figure>
                     <div className="card-body">
-                        <h2 className="card-title"> {product[0].name}
+                        <h2 className="card-title"> {product[0]?.name}
                             <div className="badge mx-2 badge-primary">Wine</div>
                         </h2>
-                        <p>{product[0].description}</p>
-                        <p>Stock:{product[0].stock}</p>
+                        <p>{product[0]?.description}</p>
+                        <p>Stock:{product[0]?.stock}</p>
                         <div className="justify-center card-actions">
                             <button className="btn btn-primary">Add to cart</button>
                         </div>
