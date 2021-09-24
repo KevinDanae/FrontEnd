@@ -20,7 +20,7 @@ const Creation = () => {
 
     async function handleSubmit(e) {
         e.preventDefault();
-        const response = await fetch('http://localhost:3001/product', {
+        const response = await fetch('https://wines-db.herokuapp.com/product', {
             method: "POST",
             headers: {
                 Accept: "application/json",
