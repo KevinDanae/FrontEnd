@@ -1,8 +1,13 @@
 import Search from "../Search";
 import React, { useState, useEffect, useSelector } from "react";
 import Cart from "../Cart";
+import { useDispatch } from "react-redux";
+import { login } from "../../actions"
+
 
 const Navbar = () => {
+  const dispatch = useDispatch();
+
   const [user, setUser] = useState({
     username: "",
     password: "",
@@ -14,6 +19,12 @@ const Navbar = () => {
       [e.target.name]: e.target.value,
     });
   };
+
+  const handleSubmit = (e) => {
+    dispatch(login(user));
+  }
+
+
 
   return (
     <>
@@ -66,7 +77,7 @@ const Navbar = () => {
                     <span className="label-text font-bold">Password</span>
                   </label>
                   <input
-                    type="text"
+                    type="password"
                     placeholder="Password"
                     className="input input-primary input-bordered"
                     value={user.password}
@@ -78,6 +89,7 @@ const Navbar = () => {
                     htmlFor="my-modal-2"
                     className="btn mt-2"
                     disabled={user.username === "" || user.password === ""}
+                    onClick={handleSubmit}
                   >
                     Login
                   </label>
@@ -88,8 +100,7 @@ const Navbar = () => {
                     <img
                       className="w-5 h-5 mr-2"
                       src="https://img.icons8.com/fluency/48/000000/google-logo.png"
-                    />
-                    Login with Google
+                    /><a href="http://wines-db.herokuapp.com/auth/google">Login with Google</a>
                   </label>
 
                   <label
