@@ -51,7 +51,7 @@ const Navbar = () => {
           </div>
 
           <label htmlFor="my-modal-2" className="btn btn-primary modal-button">
-            LOGIN/SIGNUP
+            LOGIN
           </label>
           <input type="checkbox" id="my-modal-2" className="modal-toggle" />
           <div className="modal">
@@ -63,11 +63,11 @@ const Navbar = () => {
                   </h1>
 
                   <label className="label">
-                    <span className="label-text font-bold mt-2">Username</span>
+                    <span className="label-text font-bold mt-2">E-mail</span>
                   </label>
                   <input
                     type="text"
-                    placeholder="username"
+                    placeholder="E-mail"
                     className="input input-primary input-bordered"
                     value={user.username}
                     name="username"
