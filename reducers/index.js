@@ -2,6 +2,7 @@ const initialState = {
   products: [],
   category: "",
   cart: [],
+  token: "",
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -33,7 +34,12 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         cart: action.payload,
       };
-    default:
+    case "LOGIN": 
+      return {
+        ...state,
+        token: action.payload,
+      };
+      default:
       return state;
   }
 };
