@@ -19,20 +19,20 @@ function Details() {
 
                     <div className="flex content-center card w-96 border border-red-700">
                         <figure>
-                            <img src={product[0]?.picture} className="h-96 w-full " />
+                            <img src={product?.picture} className="h-96 w-full " />
                         </figure>
                         <div className="card-body ">
-                            <h2 className="card-title"> {product[0]?.name}
+                            <h2 className="card-title"> {product?.name}
                                 <div className="badge mx-2 badge-primary">Wine</div>
                             </h2>
-                            <p>{product[0]?.description}</p>
-                            <p>Stock:{product[0]?.stock}</p>
+                            <p>{product?.description}</p>
+                            <p>Stock:{product?.stock}</p>
                             <div className="justify-center card-actions">
                                 <button className="btn btn-primary" onClick={() => dispatch(addCart({
-                                    priceDis: product[0].price,
-                                    name: product[0].name,
-                                    img: product[0].picture,
-                                    id: product[0].id,
+                                    priceDis: product.price,
+                                    name: product.name,
+                                    img: product.picture,
+                                    id: product.id,
                                     q: 1,
                                 }))}>Add to cart</button>
                             </div>
@@ -42,7 +42,7 @@ function Details() {
                 </div>
 
 
-                <div className="flex p-5">
+                <div className="flex p-10">
 
                     <div className="flex flex-col w-full justify-center align-middle">
                         <div className="grid h-20 card bg-red-100 rounded-box place-items-center">
