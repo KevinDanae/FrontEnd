@@ -38,7 +38,7 @@ const Card = ({ price, name, img, discount, id }) => {
           >
             Add to cart
           </button>
-          <button className="py-3 w-3/12 bg-white rounded-br-xl text-yellow-400 font-extrabold flex justify-center">
+          <button className="py-3 pl-3 w-3/12 bg-white rounded-br-xl text-yellow-400 font-extrabold flex justify-center">
             <svg
               width="24"
               height="24"
