@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import Navbar from "../Navbar";
 
 
 const Creation = () => {
@@ -54,6 +55,8 @@ const Creation = () => {
 
 
     return (
+        <div>
+        <Navbar />
         <div className="flex flex-col">
 
             <form onSubmit={handleSubmit}>
@@ -139,6 +142,7 @@ const Creation = () => {
             </form>
 
 
+        </div>
         </div>
     )
 }
