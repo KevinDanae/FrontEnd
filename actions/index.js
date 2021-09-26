@@ -18,6 +18,18 @@ export const getByName = (name) => async (dispatch) => {
     payload: info,
   });
 };
+
+export const getByCategory = (category) => async (dispatch) => {
+  const data = await fetch(`https://wines-db.herokuapp.com/product?category=${category}`);
+  let info = await data.json();
+  if (typeof info === "string") info = [];
+
+  dispatch({
+    type: "GET_PRODUCT_CATEGORY",
+    payload: info,
+  });
+};
+
 export const login = user => async (dispatch) => {
   try{
     const response = await axios.post('http://wines-db.herokuapp.com/login', {username: user.username, password:user.password});
