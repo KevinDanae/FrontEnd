@@ -1,10 +1,22 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { getByCategory, getProducts } from "../../actions";
 import useCategory from "../../hooks/useCategory";
 
 const Filters = () => {
   const { categories } = useCategory();
+  const dispatch = useDispatch()
+
+  const [filter, setFilter] = useState("");
+
   const change = (e) => {
-    setSub(e.target.value);
+    if (e.target.value === filter) {
+      setFilter("");
+      dispatch(getProducts());
+    } else {
+      setFilter(e.target.value);
+      dispatch(getByCategory(e.target.value));
+    }
   };
 
   return (
@@ -14,7 +26,16 @@ const Filters = () => {
           <div className="flex items-stretch">
             {categories &&
               categories.map((e) => (
-                <a key={e.name} className="btn btn-ghost btn-sm rounded-btn">{e.name}</a>
+                <button
+                  key={e.id}
+                  onClick={change}
+                  className={`btn btn-sm rounded-btn ${
+                    filter === e.name ? "select-info btn-primary" : "btn-ghost"
+                  }`}
+                  value={e.name}
+                >
+                  {e.name}
+                </button>
               ))}
           </div>
         </div>
