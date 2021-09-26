@@ -3,7 +3,9 @@ import React, { useState, useEffect } from "react";
 import Cart from "../Cart";
 import { useDispatch, useSelector } from "react-redux";
 import { login, signup } from "../../actions"
-
+import { useDispatch } from "react-redux";
+import { login } from "../../actions"
+import Link from "next/link"
 
 
 const Navbar = () => {
@@ -61,9 +63,12 @@ const Navbar = () => {
     <>
       <div className="navbar mb-10 shadow-md">
         <div className="flex-1 px-2 mx-2 navbar-start">
-          <span className="text-lg font-bold">
-            <i className="fas fa-user-md pr-3"></i>Wines
-          </span>
+          <Link href="/">
+            <span className="text-lg font-bold cursor-pointer">
+              <i className="fas fa-user-md pr-3"></i>Wines
+            </span>
+
+          </Link>
         </div>
         <div className="px-2 navbar-center">
           <Search />

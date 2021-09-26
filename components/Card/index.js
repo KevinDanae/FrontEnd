@@ -31,14 +31,14 @@ const Card = ({ price, name, img, discount, id }) => {
             <span className="line-through text-sm text-red-500">${price}</span>
           </h4>
         </div>
-        <div className="flex bottom-0 absolute w-60">
+        <div className="flex bottom-0 absolute w-52">
           <button
             onClick={() => dispatch(addCart({ priceDis, name, img, id, q: 1 }))}
             className="py-3 w-9/12 btn-primary rounded-bl-xl font-extrabold"
           >
             Add to cart
           </button>
-          <button className="py-3 w-3/12 bg-white rounded-br-xl text-yellow-400 font-extrabold flex justify-center">
+          <button className="py-3 pl-3 w-3/12 bg-white rounded-br-xl text-yellow-400 font-extrabold flex justify-center">
             <svg
               width="24"
               height="24"
