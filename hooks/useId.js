@@ -12,7 +12,7 @@ const useId = (id) => {
 
   useEffect(() => {
     request();
-  }, [product]);
+  }, [id]);
 
   return {
       product
