@@ -14,7 +14,7 @@ const rootReducer = (state = initialState, action) => {
     case "GET_PRODUCT":
       return {
         ...state,
-        products: action.payload,
+        products: Array.isArray(action.payload) ? action.payload : [action.payload],
       };
     case "ADD_CART":
       return {
