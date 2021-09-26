@@ -3,8 +3,6 @@ import React, { useState, useEffect } from "react";
 import Cart from "../Cart";
 import { useDispatch, useSelector } from "react-redux";
 import { login, signup } from "../../actions"
-import { useDispatch } from "react-redux";
-import { login } from "../../actions"
 import Link from "next/link"
 
 
