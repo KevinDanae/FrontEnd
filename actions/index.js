@@ -18,6 +18,23 @@ export const getByName = (name) => async (dispatch) => {
     payload: info,
   });
 };
+export const login = user => async (dispatch) => {
+  try{
+    const response = await axios.post('http://wines-db.herokuapp.com/login', {username: user.username, password:user.password});
+    const data = await response.data
+    console.log(data)
+    return dispatch({
+      type: 'LOGIN',
+      payload: data
+  });
+  }
+catch(err){
+  console.log(err)
+};
+};
+
+
+
 
 export const addCart = (product) => async (dispatch) => {
   let array = [];

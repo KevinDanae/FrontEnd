@@ -10,13 +10,13 @@ const Card = ({ price, name, img, discount, id }) => {
 
   return (
     <>
-      <div className="relative border bg-white border-purple-900 rounded-xl">
-        <span className="absolute top-0 left-0 text-sm btn-ghost text-white bg-red-800 p-2 rounded-br-xl rounded-tl-xl">
+      <div className="relative border bg-white border-purple-900 rounded-xl h-96">
+        <span className="absolute top-0 left-0 text-sm text-white bg-red-800 p-2 rounded-br-xl rounded-tl-xl">
           {discount || 19}% OFF
         </span>
         <Link href={`/product/${id}`}>
           <img
-            className="max-h-52 w-full bg-white object-contain rounded-t-xl"
+            className="max-h-52 w-full bg-white object-contain rounded-t-xl cursor-pointer"
             src={
               img ||
               "https://www.nicepng.com/png/detail/695-6953710_botella-de-vino-png.png"
@@ -31,14 +31,14 @@ const Card = ({ price, name, img, discount, id }) => {
             <span className="line-through text-sm text-red-500">${price}</span>
           </h4>
         </div>
-        <div className="flex">
+        <div className="flex bottom-0 absolute w-52">
           <button
             onClick={() => dispatch(addCart({ priceDis, name, img, id, q: 1 }))}
-            className="py-3 w-9/12 relative btn-primary rounded-bl-xl font-extrabold"
+            className="py-3 w-9/12 btn-primary rounded-bl-xl font-extrabold"
           >
             Add to cart
           </button>
-          <button className="py-3 w-3/12 bg-white rounded-br-xl text-yellow-400 font-extrabold flex justify-center">
+          <button className="py-3 pl-3 w-3/12 bg-white rounded-br-xl text-yellow-400 font-extrabold flex justify-center">
             <svg
               width="24"
               height="24"
