@@ -1,3 +1,6 @@
+
+import axios from 'axios';
+
 export const getProducts = () => async (dispatch) => {
   const data = await fetch("https://wines-db.herokuapp.com/product");
   const info = await data.json();
@@ -18,14 +21,53 @@ export const getByName = (name) => async (dispatch) => {
     payload: info,
   });
 };
+
+export const signup = (userSignup) => async (dispatch) => {
+  try{
+    const response = await axios.post("https://wines-db.herokuapp.com/signup", {
+    username: userSignup.username,
+    password: userSignup.password,
+    mail: userSignup.mail,
+    name: userSignup.name,
+    lastname: userSignup.lastName
+    });
+    const data = await response.data;
+    console.log(data);
+    return dispatch({
+      type: "SIGNUP",
+      payload: data,
+    });
+  }
+  catch(err){
+    console.log(err);
+  }
+};
+
+
+export const getByCategory = (category) => async (dispatch) => {
+  const data = await fetch(`https://wines-db.herokuapp.com/product?category=${category}`);
+  let info = await data.json();
+  if (typeof info === "string") info = [];
+
+  dispatch({
+    type: "GET_PRODUCT_CATEGORY",
+    payload: info,
+  });
+};
+
+
 export const login = user => async (dispatch) => {
   try{
-    const response = await axios.post('http://wines-db.herokuapp.com/login', {username: user.username, password:user.password});
+    const response = await axios.post('http://wines-db.herokuapp.com/login', {
+      username: user.username, 
+      password:user.password});
     const data = await response.data
+    //guardar token en localstorage
+    localStorage.setItem('token', data.token);
     console.log(data)
     return dispatch({
       type: 'LOGIN',
-      payload: data
+      payload: data.token,
   });
   }
 catch(err){
