@@ -3,9 +3,11 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { addCart, getProducts } from "../actions";
 import Cards from "../components/Cards";
-import Filters from "../components/Filters";
-import Navbar from "../components/Navbar";
+// import Filters from "../components/Filters";
 import Carousel from "../components/Carousel";
+import LandingPage from "../components/LandingPage";
+import Navbar from "../components/Navbar";
+
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -18,9 +20,11 @@ export default function Home() {
   return (
     <main>
       <Navbar />
-      <Filters />
       <Carousel />
-      <Cards />
+      <LandingPage />
+      {/* <Filters />
+       */}
+      {/* <Cards /> */}
     </main>
   );
 }
