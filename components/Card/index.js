@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import Link from "next/link";
 import { addCart } from "../../actions";
 
-const Card = ({ price, name, img, discount, id }) => {
+const Card = ({ price, name, img, discount, id, stock }) => {
   const priceDis = price - price * (discount || 19 / 100);
 
   const dispatch = useDispatch();
@@ -34,9 +34,9 @@ const Card = ({ price, name, img, discount, id }) => {
         <div className="flex bottom-0 absolute w-52">
           <button
             onClick={() => dispatch(addCart({ priceDis, name, img, id, q: 1 }))}
-            className="py-3 w-9/12 btn-primary rounded-bl-xl font-extrabold"
+            className={`py-3 w-9/12 rounded-bl-xl font-extrabold ${stock ? 'btn-primary' : 'btn-disabled'} `}
           >
-            Add to cart
+            { stock ? 'Add to Cart' : 'Sold Out'}
           </button>
           <button className="py-3 pl-3 w-3/12 bg-white rounded-br-xl text-yellow-400 font-extrabold flex justify-center">
             <svg

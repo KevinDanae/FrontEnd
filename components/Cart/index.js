@@ -1,7 +1,12 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addCart, removeCart } from "../../actions";
+import { loadStripe } from '@stripe/stripe-js';
 import Link from "next/link";
+
+const stripePromise = loadStripe(
+  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
+);
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
@@ -80,11 +85,11 @@ const Cart = () => {
             </h1>
           )}
           <div className="flex align-middle bg-base-200 justify-center p-4">
-            <Link href="/checkout">
-              <button className="btn btn-secondary">
+            <form action='/api/checkout_sessions'  method="POST">
+              <button className="btn btn-secondary" type='submit' role='link'>
                 Checkout: ${total.toFixed(2)}
               </button>
-            </Link>
+            </form>
           </div>
         </div>
       </div>
