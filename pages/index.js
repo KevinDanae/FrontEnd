@@ -20,11 +20,7 @@ export default function Home() {
   return (
     <main>
       <Navbar />
-      <Carousel />
       <LandingPage />
-      {/* <Filters />
-       */}
-      {/* <Cards /> */}
     </main>
   );
 }
