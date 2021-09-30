@@ -8,10 +8,9 @@ const Creation = () => {
     const [nuevoProd, setNuevoProd] = useState({
         name: "",
         description: "",
-        brand:"",
+        brand: "",
         price: "",
         year: "",
-        rating: "",
         stock: 0,
         picture: "",
         category: "",
@@ -34,10 +33,9 @@ const Creation = () => {
         setNuevoProd({
             name: "",
             description: "",
-            brand:"",
+            brand: "",
             price: "",
             year: "",
-            rating: "",
             stock: 0,
             picture: "",
             category: "",
@@ -53,96 +51,94 @@ const Creation = () => {
         })
     }
 
-
     return (
         <div>
-        <Navbar />
-        <div className="flex flex-col">
+            <Navbar />
+            <div className="flex flex-col w-screen border border-white ">
+                <div className="flex justify-center">
+                    <div className="flex justify-center bg-purple-50 p-5 shadow-2xl rounded-lg ">
+                        <form onSubmit={handleSubmit}>
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="badge mx-2 badge-primary">Name:</span>
+                                </label>
+                                <input type="text" name="name" onChange={(e) => handleChange(e)} placeholder="The name of your product..." value={nuevoProd.name} className="input input-bordered border border-red-500" required />
+                            </div>
 
-            <form onSubmit={handleSubmit}>
+                            <label className="block mt-4">
+                                <span className="badge mx-2 badge-primary">Category</span>
+                                <select className=" form-select mt-1 block w-full border border-red-500 rounded-lg" onChange={(e) => handleChange(e)} name="category">
+                                    <option name="category" value="wines" >Wine</option>
+                                    <option name="category" value="beers" >Beer</option>
+                                    <option name="category" value="whisky" >Whisky</option>
+                                </select>
+                            </label>
 
-                <div className="form-control">
-                    <label className="label">
-                        <span className="label-text">Name:</span>
-                    </label>
-                    <input type="text" name="name" onChange={(e) => handleChange(e)} placeholder="Name" value={nuevoProd.name} className="input input-bordered" required />
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="badge mx-2 badge-primary">Description:</span>
+                                </label>
+                                <textarea type="textarea" name="description" onChange={(e) => handleChange(e)} placeholder="A brief summary of the product for the potential customer..." value={nuevoProd.description} className="input input-bordered border border-red-500" />
+                            </div>
+
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="badge mx-2 badge-primary">Brand:</span>
+                                </label>
+                                <input type="text" name="brand" onChange={(e) => handleChange(e)} placeholder="Name of the brand/company" value={nuevoProd.brand} className="input input-bordered border border-red-500" />
+                            </div>
+
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="badge mx-2 badge-primary">Price:</span>
+                                </label>
+                                <input type="text" name="price" onChange={(e) => handleChange(e)} placeholder="Price(without discounts)" value={nuevoProd.price} className="input input-bordered border border-red-500" required />
+                            </div>
+
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="badge mx-2 badge-primary">Year:</span>
+                                </label>
+                                <input type="number" name="year" onChange={(e) => handleChange(e)} placeholder="(only for wine category)" value={nuevoProd.year} className="input input-bordered border border-red-500" />
+                            </div>
+
+
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="badge mx-2 badge-primary">Stock:</span>
+                                </label>
+                                <input type="number" name="stock" placeholder="Stock available for purchase" className="input input-bordered border border-red-500" value={nuevoProd.stock} onChange={(e) => handleChange(e)} />
+                            </div>
+
+                            <label>
+                                Image:
+                                <input type="file" name="picture" className="m-5" onChange={(e) => handleChange(e)} multiple />
+                            </label>
+
+
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="badge mx-2 badge-primary">Subcategory:</span>
+                                </label>
+                                <input type="text" name="subcategory" placeholder="Subcategory" className="input input-bordered border border-red-500" value={nuevoProd.subcategory} onChange={(e) => handleChange(e)} />
+                            </div>
+
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="badge mx-2 badge-primary">Grape:</span>
+                                </label>
+                                <input type="text" name="grape" placeholder="Grape" className="input input-bordered border border-red-500" value={nuevoProd.grape} onChange={(e) => handleChange(e)} />
+                            </div>
+
+                            <button className='btn btn-primary ' type='submit'>Add Product</button>
+
+                        </form>
+
+
+                    </div>
+
                 </div>
-
-                <div className="form-control">
-                    <label className="label">
-                        <span className="label-text">Description:</span>
-                    </label>
-                    <textarea type="textarea" name="description" onChange={(e) => handleChange(e)} placeholder="Description" value={nuevoProd.description} className="input input-bordered" />
-                </div>
-
-                <div className="form-control">
-                    <label className="label">
-                        <span className="label-text">Brand:</span>
-                    </label>
-                    <input type="text" name="brand" onChange={(e) => handleChange(e)} placeholder="Description" value={nuevoProd.brand} className="input input-bordered" />
-                </div>
-
-                <div className="form-control">
-                    <label className="label">
-                        <span className="label-text">Price:</span>
-                    </label>
-                    <input type="text" name="price" onChange={(e) => handleChange(e)} placeholder="Price" value={nuevoProd.price} className="input input-bordered" required />
-                </div>
-
-                <div className="form-control">
-                    <label className="label">
-                        <span className="label-text">Year:</span>
-                    </label>
-                    <input type="number" name="year" onChange={(e) => handleChange(e)} placeholder="Year" value={nuevoProd.year} className="input input-bordered" required />
-                </div>
-
-                <div className="form-control">
-                    <label className="label">
-                        <span className="label-text">Rating:</span>
-                    </label>
-                    <input type="text" name="rating" placeholder="rating" className="input input-bordered" value={nuevoProd.rating} onChange={(e) => handleChange(e)}/>
-                </div>
-
-                <div className="form-control">
-                    <label className="label">
-                        <span className="label-text">Stock:</span>
-                    </label>
-                    <input type="number" name="stock" placeholder="stock" className="input input-bordered" value={nuevoProd.stock} onChange={(e) => handleChange(e)}/>
-                </div>
-
-                <label>
-                    Image:
-                    <input type="file" name="picture" onChange={(e) => handleChange(e)} multiple />
-                </label>
-
-                <div className="form-control">
-                    <label className="label">
-                        <span className="label-text">Category:</span>
-                    </label>
-                    <input type="text" name="category" placeholder="Category" className="input input-bordered" value={nuevoProd.category} onChange={(e) => handleChange(e)}/>
-                </div>
-
-                <div className="form-control">
-                    <label className="label">
-                        <span className="label-text">Subcategory:</span>
-                    </label>
-                    <input type="text" name="subcategory" placeholder="Subcategory" className="input input-bordered" value={nuevoProd.subcategory} onChange={(e) => handleChange(e)}/>
-                </div>
-
-                <div className="form-control">
-                    <label className="label">
-                        <span className="label-text">Grape:</span>
-                    </label>
-                    <input type="text" name="grape" placeholder="Grape" className="input input-bordered" value={nuevoProd.grape} onChange={(e) => handleChange(e)}/>
-                </div>
-
-
-                <button className='btn btn-primary ml-24' type='submit'>Add Product</button>
-
-            </form>
-
-
-        </div>
+            </div>
         </div>
     )
 }

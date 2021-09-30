@@ -12,7 +12,6 @@ const useCategory = () => {
   useEffect(() => {
     request();
   }, []);
-  console.log(categories);
   return {
       categories
   }
