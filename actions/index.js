@@ -64,6 +64,7 @@ export const login = user => async (dispatch) => {
     const data = await response.data
     //guardar token en localstorage
     localStorage.setItem('token', data.token);
+    localStorage.setItem('userId', data.user.id);
     console.log(data)
     return dispatch({
       type: 'LOGIN',
