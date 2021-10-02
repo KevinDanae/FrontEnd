@@ -1,12 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import CardCheckout from "../CardCheckout";
+import {checkoutMercadoPago, checkoutPaypal} from "../../actions"
+import { useDispatch, useSelector } from "react-redux";
+import Link from "next/dist/client/link";
+
 
 const Checkout = ({ cart }) => {
-
+  const dispatch = useDispatch();
+  const mercadoPago = useSelector(state => state.checkoutMercadoPago);
+  const paypal = useSelector(state => state.checkoutPaypal);
   let total = 0;
   cart.forEach((e) => {
     total = total + e.priceDis * e.q;
   });
+  useEffect(() => {
+    dispatch(checkoutMercadoPago(total));
+    dispatch(checkoutPaypal(total));
+  }, [total]);
+
+
 
   return (
     <div>
@@ -154,8 +166,8 @@ const Checkout = ({ cart }) => {
                       ${total.toFixed(2)}
                     </div>
                   </div>
-                  <a href="#">
-                    <button className="flex justify-center w-full px-10 py-3 mt-6 font-medium text-white uppercase bg-gray-800 rounded-full shadow item-center hover:bg-gray-700 focus:shadow-outline focus:outline-none">
+                  
+                    <label for="my-modal-2" className="flex justify-center w-full px-10 py-3 mt-6 font-medium text-white uppercase bg-gray-800 rounded-full shadow item-center hover:bg-gray-700 focus:shadow-outline focus:outline-none">
                       <svg
                         aria-hidden="true"
                         data-prefix="far"
@@ -170,8 +182,33 @@ const Checkout = ({ cart }) => {
                         />
                       </svg>
                       <span className="ml-2 mt-5px">Procceed to checkout</span>
-                    </button>
-                  </a>
+                    </label>
+                    <input type="checkbox" id="my-modal-2" class="modal-toggle"/>
+                    <div class="modal">
+                    <div class="modal-box">
+                      <h1>Formas de pago</h1>
+                      <div class="flex flex-col">
+                        <button className="btn">
+                          <Link href={mercadoPago}>
+                            Mercado Pago 
+                          </Link>
+                        </button>
+                        <button className="btn">
+                          <Link href={paypal}>
+                            Paypal
+                          </Link>
+                          
+                        </button>
+                        <button className="btn">
+                          Stripe
+                        </button>
+                      </div>
+                      <div class="modal-action">
+                        <label for="my-modal-2" class="btn btn-primary">Accept</label> 
+                        <label for="my-modal-2" class="btn">Close</label>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
