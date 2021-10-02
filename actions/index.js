@@ -44,6 +44,45 @@ export const signup = (userSignup) => async (dispatch) => {
   }
 };
 
+export const checkoutMercadoPago = (total) => async (dispatch) => {
+  try{
+    const response = await axios.post("https://wines-db.herokuapp.com/mepa/get-payment", {
+    title: "Products",
+    unit_price: total,
+    quantity: 1,
+    orderid: 1
+    });
+    const data = await response.data;
+    console.log = data;
+    return dispatch({
+      type: "CHECKOUT_MERCADO_PAGO",
+      payload: data,
+    });
+  }
+  catch(err){
+    console.log(err);
+  }
+};
+
+export const checkoutPaypal = (total) => async (dispatch) => {
+  try{
+    const response = await axios.post("https://wines-db.herokuapp.com/paypal/get-payment", {
+      currency_code: "usd",
+      value: Math.floor(total/186),
+      orderid: "1"
+    });
+    const data = await response.data;
+    console.log = data;
+    return dispatch({
+      type: "CHECKOUT_PAYPAL",
+      payload: data,
+    });
+  }
+  catch(err){
+    console.log(err);
+  }
+};
+
 export const getByCategory = (category) => async (dispatch) => {
   const data = await fetch(
     `https://wines-db.herokuapp.com/product?category=${category}`
