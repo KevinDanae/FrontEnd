@@ -92,21 +92,36 @@ const Navbar = () => {
              </svg>
            </button>
          </div> 
-         <div class="flex-none">
-           <div class="avatar">
+         <div class="flex-none dropdown dropdown-left">
+           <div
+           tabIndex="0" 
+           class="avatar">
              <div class="rounded-full w-10 h-10 m-2">
                <img src="https://i.pravatar.cc/500?img=41"/>
              </div>
+              <ul tabindex="0" class="p-2 shadow menu dropdown-content bg-base-100 rounded-box w-52">
+                <li>
+                  <a>Profile</a>
+                </li>
+                {/*user.admin ? (
+                  <li>
+                    <a>Dashboard</a>
+                  </li>
+                ):(
+                  <li>
+                    <a>My purchases</a>
+                  </li>
+                )*/}
+                <li>
+                  <a>My Purchases</a>
+                </li>
+                <li>
+                  <a
+                    onClick={logout}
+                  >Logout</a>
+                </li>
+              </ul>
            </div>
-        </div>
-        <div class="flex-none">
-          <button 
-          class="btn btn-primary"
-          onClick={logout}
-          >
-          
-            LOGOUT
-          </button>
         </div>
           </>
           ) : (
