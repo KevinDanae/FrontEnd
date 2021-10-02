@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addCart, removeCart } from "../../actions";
 import { loadStripe } from '@stripe/stripe-js';
 import Link from "next/link";
+import useActionCart from "../../hooks/useActionCart";
 
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
@@ -12,9 +13,14 @@ const Cart = () => {
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
+  const actionCart = async (action, id) => {
+    const success = await useActionCart(id, action);
+    if (success) dispatch(addCart());
+  }
+
   let total = 0;
   cart.map((e) => {
-    total = total + e.q * e.priceDis;
+    total = total + e.quantity * e.price;
   });
   
 
@@ -25,12 +31,12 @@ const Cart = () => {
           {cart.length ? (
             cart.map((e) => (
               <div
-                key={e.id}
+                key={e.id || e.name}
                 className="p-2 flex bg-base-200 hover:bg-gray-100 cursor-pointer border-b border-gray-100"
               >
                 <div className="p-2 w-12">
                   <img
-                    src={e.img}
+                    src={e.img || e.picture }
                     alt="img product"
                   />
                 </div>
@@ -38,23 +44,23 @@ const Cart = () => {
                   <div className="font-bold">{e.name}</div>
                   <div className="truncate">Product 1 description</div>
                   <div className="text-gray-400">
-                    Qty: {e.q}
+                    Qty: {e.q || e.quantity}
                     <button
                       className="ml-3 w-4 h-4 align-middle hover:bg-red-200 rounded-full cursor-pointer text-red-700"
-                      onClick={() => dispatch(removeCart(e.id, true))}
+                      onClick={() => localStorage.getItem('token') && localStorage.getItem('idCart') ? actionCart('remove', e.id) : dispatch(removeCart(e.id, true))}
                     >
                       -
                     </button>
                     <button
                       className="ml-3 w-4 h-4 align-middle hover:bg-red-200 rounded-full cursor-pointer text-red-700"
-                      onClick={() => dispatch(addCart({ id: e.id }))}
+                      onClick={() => localStorage.getItem('token') && localStorage.getItem('idCart') ?  actionCart('add', e.id): dispatch(addCart({ id: e.id }))}
                     >
                       +
                     </button>
                   </div>
                 </div>
                 <div className="flex flex-col w-18 font-medium items-end">
-                  <button onClick={() => dispatch(removeCart(e.id))}>
+                  <button onClick={() => localStorage.getItem('token') && localStorage.getItem('idCart') ? actionCart('removeproduct', e.id) : dispatch(removeCart(e.id))}>
                     <div className="w-4 h-4 mb-6 hover:bg-red-200 rounded-full cursor-pointer text-red-700">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -75,7 +81,7 @@ const Cart = () => {
                       </svg>
                     </div>
                   </button>
-                  ${e.priceDis.toFixed(2)}
+                  ${e.price.toFixed(2)}
                 </div>
               </div>
             ))
