@@ -5,6 +5,7 @@ import Navbar from "../Navbar";
 
 const Creation = () => {
     const fetch = require('node-fetch');
+    
     const [nuevoProd, setNuevoProd] = useState({
         name: "",
         description: "",
