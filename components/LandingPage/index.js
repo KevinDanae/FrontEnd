@@ -7,17 +7,17 @@ import Carousel from '../Carousel'
 const LandingPage = () => {
     return (
     <>
-        <div class="container mx-auto flex flex-col md:flex-row items-center my-12 md:my-24">
-            <div class="flex flex-col w-full lg:w-1/2 justify-center items-start pt-12 pb-24 px-6">
-                <h1 class="my-4 text-3xl font-bold">Empedocles</h1>
-                <p class="leading-normal mb-4">From the cellar to your home</p>
-                <button class="btn btn-primary">
+        <div className="container mx-auto flex flex-col md:flex-row items-center my-12 md:my-24">
+            <div className="flex flex-col w-full lg:w-1/2 justify-center items-start pt-12 pb-24 px-6">
+                <h1 className="my-4 text-3xl font-bold">Empedocles</h1>
+                <p className="leading-normal mb-4">From the cellar to your home</p>
+                <button className="btn btn-primary">
                     <Link href="/home">
                         Shop Now
                     </Link>
                     </button>
             </div>
-            <div class="w-full lg:w-1/2 lg:py-6 text-center">
+            <div className="w-full lg:w-1/2 lg:py-6 text-center">
                 <img 
                 className="w-3/5"
                 src="https://images.unsplash.com/photo-1470158499416-75be9aa0c4db?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=687&q=80"

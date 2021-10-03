@@ -1,7 +1,10 @@
 import React from "react";
 import Orders from "../Orders";
 
-const Sidebar = () => {
+const Sidebar = ({render}) => {
+
+  const Render = render;
+
   return (
     <div>
       <div className="flex flex-row h-full">
@@ -117,7 +120,7 @@ const Sidebar = () => {
           </div>
         </nav>
         <div className="px-16 py-4 text-gray-700 bg-gray-200 h-screen w-screen">
-          <Orders />
+          <Render />
         </div>
       </div>
     </div>

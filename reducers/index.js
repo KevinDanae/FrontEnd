@@ -3,6 +3,8 @@ const initialState = {
   category: "",
   cart: [],
   token: "",
+  checkoutMercadoPago: "",
+  checkoutPaypal: "",
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -39,8 +41,18 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         token: action.payload,
       };
+    case "CHECKOUT_MERCADO_PAGO":
+      return {
+        ...state,
+        checkoutMercadoPago: action.payload,
+      }
       default:
       return state;
+    case "CHECKOUT_PAYPAL":
+      return {
+        ...state,
+        checkoutPaypal: action.payload,
+      }
   }
 };
 
