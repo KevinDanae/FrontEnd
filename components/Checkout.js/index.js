@@ -187,7 +187,7 @@ const Checkout = ({ cart }) => {
                     <div class="modal">
                     <div class="modal-box">
                       <h1>Formas de pago</h1>
-                      <div class="flex flex-col">
+                      <div class="flex flex-col gap-2">
                         <button className="btn">
                           <Link href={mercadoPago}>
                             Mercado Pago 
