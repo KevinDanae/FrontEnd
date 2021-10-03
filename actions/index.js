@@ -45,11 +45,10 @@ export const signup = (userSignup) => async (dispatch) => {
 
 export const checkoutMercadoPago = (total) => async (dispatch) => {
   try{
+    const userId = localStorage.getItem("userId");
     const response = await axios.post("https://wines-db.herokuapp.com/mepa/get-payment", {
-    title: "Products",
-    unit_price: total,
-    quantity: 1,
-    orderid: 1
+    price: total,
+    orderid: userId
     });
     const data = await response.data;
     console.log = data;
