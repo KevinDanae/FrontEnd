@@ -9,7 +9,7 @@ import Navbar from "../components/Navbar";
 export default function Home() {
   const token = useSelector((state) => state.token);
   const dispatch = useDispatch();
-  
+
   useEffect(() => {
     dispatch(getProducts());
     dispatch(addCart());

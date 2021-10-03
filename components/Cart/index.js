@@ -1,8 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addCart, removeCart } from "../../actions";
-import { loadStripe } from '@stripe/stripe-js';
-import Link from "next/link";
+import { loadStripe } from "@stripe/stripe-js";
 import useActionCart from "../../hooks/useActionCart";
 
 const stripePromise = loadStripe(
@@ -16,13 +15,16 @@ const Cart = () => {
   const actionCart = async (action, id) => {
     const success = await useActionCart(id, action);
     if (success) dispatch(addCart());
-  }
+  };
 
   let total = 0;
+  let name = "";
+  const images = [];
   cart.map((e) => {
     total = total + e.quantity * e.price;
+    name = name + e.name + ` x${e.quantity}` + ", ";
+    images.push(e.image || e.img);
   });
-  
 
   return (
     <>
@@ -35,10 +37,7 @@ const Cart = () => {
                 className="p-2 flex bg-base-200 hover:bg-gray-100 cursor-pointer border-b border-gray-100"
               >
                 <div className="p-2 w-12">
-                  <img
-                    src={e.img || e.picture }
-                    alt="img product"
-                  />
+                  <img src={e.img || e.image} alt="img product" />
                 </div>
                 <div className="flex-auto text-sm w-32">
                   <div className="font-bold">{e.name}</div>
@@ -47,20 +46,37 @@ const Cart = () => {
                     Qty: {e.q || e.quantity}
                     <button
                       className="ml-3 w-4 h-4 align-middle hover:bg-red-200 rounded-full cursor-pointer text-red-700"
-                      onClick={() => localStorage.getItem('token') && localStorage.getItem('idCart') ? actionCart('remove', e.id) : dispatch(removeCart(e.id, true))}
+                      onClick={() =>
+                        localStorage.getItem("token") &&
+                        localStorage.getItem("idCart")
+                          ? actionCart("remove", e.id)
+                          : dispatch(removeCart(e.id, true))
+                      }
                     >
                       -
                     </button>
                     <button
                       className="ml-3 w-4 h-4 align-middle hover:bg-red-200 rounded-full cursor-pointer text-red-700"
-                      onClick={() => localStorage.getItem('token') && localStorage.getItem('idCart') ?  actionCart('add', e.id): dispatch(addCart({ id: e.id }))}
+                      onClick={() =>
+                        localStorage.getItem("token") &&
+                        localStorage.getItem("idCart")
+                          ? actionCart("add", e.id)
+                          : dispatch(addCart({ id: e.id }))
+                      }
                     >
                       +
                     </button>
                   </div>
                 </div>
                 <div className="flex flex-col w-18 font-medium items-end">
-                  <button onClick={() => localStorage.getItem('token') && localStorage.getItem('idCart') ? actionCart('removeproduct', e.id) : dispatch(removeCart(e.id))}>
+                  <button
+                    onClick={() =>
+                      localStorage.getItem("token") &&
+                      localStorage.getItem("idCart")
+                        ? actionCart("removeproduct", e.id)
+                        : dispatch(removeCart(e.id))
+                    }
+                  >
                     <div className="w-4 h-4 mb-6 hover:bg-red-200 rounded-full cursor-pointer text-red-700">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -91,9 +107,16 @@ const Cart = () => {
             </h1>
           )}
           <div className="flex align-middle bg-base-200 justify-center p-4">
-            <form action='/api/checkout_sessions'  method="POST">
-              <button className="btn btn-secondary" type='submit' role='link'>
-                Checkout: ${total.toFixed(2)}
+            <form
+              action={`/api/checkout_sessions?name=${name}&total=${total}&images=${images}`}
+              method="POST"
+            >
+              <button
+                className={`btn ${total != 0 ? "btn-secondary" : "btn-disabled"}`}
+                type="submit"
+                role="link"
+              >
+                {total != 0 ? `Checkout: ${total.toFixed(2)}` : "Agrega algo"}
               </button>
             </form>
           </div>
