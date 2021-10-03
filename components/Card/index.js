@@ -2,11 +2,17 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import Link from "next/link";
 import { addCart } from "../../actions";
+import useActionCart from "../../hooks/useActionCart";
 
-const Card = ({ price, name, img, discount, id }) => {
-  const priceDis = price - price * (discount || 19 / 100);
+const Card = ({ price, name, img, discount, id, stock }) => {
+  price = price - price * (discount || 19 / 100);
 
   const dispatch = useDispatch();
+
+  const actionCart = async (action, id) => {
+    const success = await useActionCart(id, action);
+    if (success) dispatch(addCart());
+  };
 
   return (
     <>
@@ -27,16 +33,22 @@ const Card = ({ price, name, img, discount, id }) => {
         <div className="p-5">
           <h2 className="text-lg">{name || "Soy un vino"}</h2>
           <h4 className="text-gray-500 text-sm">
-            ${priceDis.toFixed(2)}{" "}
+            ${price.toFixed(2)}{" "}
             <span className="line-through text-sm text-red-500">${price}</span>
           </h4>
         </div>
         <div className="flex bottom-0 absolute w-52">
           <button
-            onClick={() => dispatch(addCart({ priceDis, name, img, id, q: 1 }))}
-            className="py-3 w-9/12 btn-primary rounded-bl-xl font-extrabold"
+            onClick={() =>
+              localStorage.getItem("token") && localStorage.getItem("idCart")
+                ? actionCart("addproduct", id)
+                : dispatch(addCart({ price, name, img, id, quantity: 1 }))
+            }
+            className={`py-3 w-9/12 rounded-bl-xl font-extrabold ${
+              stock ? "btn-primary" : "btn-disabled"
+            } `}
           >
-            Add to cart
+            {stock ? "Add to Cart" : "Sold Out"}
           </button>
           <button className="py-3 pl-3 w-3/12 bg-white rounded-br-xl text-yellow-400 font-extrabold flex justify-center">
             <svg

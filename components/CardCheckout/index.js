@@ -55,12 +55,12 @@ const CardCheckout = ({ product }) => {
           </td>
           <td className="hidden text-right md:table-cell">
             <span className="text-sm lg:text-base font-medium">
-              ${product.priceDis.toFixed(2)}
+              ${product.price.toFixed(2)}
             </span>
           </td>
           <td className="text-right">
             <span className="text-sm lg:text-base font-medium">
-              ${(product.priceDis * product.q).toFixed(2)}
+              ${(product.price * product.q).toFixed(2)}
             </span>
           </td>
         </tr>

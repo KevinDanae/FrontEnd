@@ -4,16 +4,26 @@ import Cart from "../Cart";
 import { useDispatch, useSelector } from "react-redux";
 import { login, signup } from "../../actions"
 import Link from "next/link"
+import useCart from "../../hooks/useCart";
+
+
+function emailIsValid (email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+}
+
 
 
 const Navbar = () => {
   const dispatch = useDispatch();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   const logout = () => {
     localStorage.removeItem("token");
     setIsLoggedIn(false);
   };
+
   const tokenRedux = useSelector(state => state.token);
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
@@ -50,9 +60,11 @@ const Navbar = () => {
 
   const handleSubmit = (e) => {
     dispatch(login(user));
+    useCart();
   }
   const handleSubmitSignup = (e) => {
     dispatch(signup(userSignup));
+    setFormData(true); 
   }
 
 
@@ -85,28 +97,29 @@ const Navbar = () => {
           </div>
           {isLoggedIn ? (
             <>
-           <div class="flex-none">
-           <button class="btn btn-square btn-ghost">
-             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-6 h-6 stroke-current">     
-               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>                     
+           <div className="flex-none">
+           <button className="btn btn-square btn-ghost">
+             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-6 h-6 stroke-current">     
+               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>                     
              </svg>
            </button>
          </div> 
-         <div class="flex-none">
-           <div class="avatar">
+         <div class="flex-none dropdown dropdown-left">
+           <div tabIndex="0" className="avatar">
              <div class="rounded-full w-10 h-10 m-2">
                <img src="https://i.pravatar.cc/500?img=41"/>
              </div>
+             <ul tabIndex="0" className="p-2 shadow menu dropdown-content bg-base-100 rounded-box w-52">
+                <li>
+                  <a>Profile</a>
+                </li>
+                <li>
+                  <a
+                    onClick={logout}
+                  >Logout</a> 
+                </li>
+             </ul>
            </div>
-        </div>
-        <div class="flex-none">
-          <button 
-          class="btn btn-primary"
-          onClick={logout}
-          >
-          
-            LOGOUT
-          </button>
         </div>
           </>
           ) : (
@@ -230,6 +243,11 @@ const Navbar = () => {
                   name="mail"
                   onChange={handleChangeSignup}
                 />
+                {emailIsValid(userSignup.mail) === false && (
+                  <p className="text-red-500 mt-1 text-sm">
+                    *Please enter a valid email
+                  </p>
+                )}
                 <label className="label">
                   <span className="label-text font-bold">Password</span>
                 </label>
@@ -241,16 +259,19 @@ const Navbar = () => {
                   name="password"
                   onChange={handleChangeSignup}
                 />
-
+                {userSignup.password.length < 6 && (
+                  <p className="text-red-500 mt-1 text-sm">
+                    *Password must be at least 6 characters
+                  </p>
+                )}
                 <label
-                  htmlFor="my-modal-2"
                   className="btn mt-2"
-                  disabled={userSignup.username === "" || userSignup.password === "" || userSignup.name === "" || userSignup.lastName === "" || userSignup.mail === ""}
+                  disabled={userSignup.username === "" || userSignup.password.length < 6 || userSignup.name === "" || userSignup.lastName === "" || emailIsValid(userSignup.mail) === false}
                   onClick={handleSubmitSignup}
                 >
                   Sign Up
                 </label>
-                <label
+                {/* <label
                   htmlFor="my-modal-2"
                   className="btn bg-black  mt-2 hover:bg-white hover:text-black duration-150"
                 >
@@ -258,7 +279,7 @@ const Navbar = () => {
                     className="w-5 h-5 mr-2"
                     src="https://img.icons8.com/fluency/48/000000/google-logo.png"
                   /><a href="http://wines-db.herokuapp.com/auth/google">Sign up with Google</a>
-                </label>
+                </label> */}
               <p>You have an account? <button
               onClick={() => setFormData(true)}
               className="link link-secondary"

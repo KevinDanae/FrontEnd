@@ -2,17 +2,59 @@ import React from "react";
 import { useRouter } from "next/router";
 import useId from "../../hooks/useId";
 import { useDispatch } from "react-redux";
-import { addCart } from "../../actions";
+import { addCart, getProducts } from "../../actions";
 import Navbar from "../../components/Navbar";
+import { useState } from "react";
+import { useEffect } from "react";
 
 
 
 function Details() {
     const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(getProducts());
+        dispatch(addCart());
+    }, []);
+
     const router = useRouter()
     const { Details } = router.query
     const { product, review } = useId(Details)
-    console.log(review)
+
+    const [newReview, setReview] = useState({
+        comment: "",
+        stars: 0,
+        product: Details,
+    })
+
+    async function handleSubmit(e) {
+        e.preventDefault();
+        const response = await fetch('https://wines-db.herokuapp.com/reviews', {
+            method: "POST",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(newReview)
+        })
+        const data = await response.json()
+        alert('Review added')
+        setReview({
+            comment: "",
+            stars: 0,
+            product:"",
+        })
+    }
+
+    const handleChange = (e) => {
+        setReview({
+            ...newReview,
+            [e.target.name]: e.target.value,
+        })
+    }
+
+    console.log(Details)
+
     return (
         <div>
             <Navbar />
@@ -27,10 +69,12 @@ function Details() {
                             <h2 className="card-title"> {product?.name}
                                 <div className="badge mx-2 badge-primary">Wines</div>
                             </h2>
-                            <p>{product?.description}</p>
-                            <p>Stock:{product?.stock}</p>
+                            <h2>Brand: {product.brand}</h2>
+                            <p>Description: {product?.description}</p>
+                            <h1 className="mt-2">Stock:{product?.stock}</h1>
                             <div className="justify-center card-actions">
-                                <button className="btn btn-primary" onClick={() => dispatch(addCart({
+                                {/* {product?.stock === 0 ? <h2 style={{color: 'red'}}>There is no stock available</h2> : {}} */}
+                                <button className="btn btn-primary" disabled={product.stock === 0} onClick={() => dispatch(addCart({
                                     priceDis: product.price,
                                     name: product.name,
                                     img: product.picture,
@@ -40,7 +84,6 @@ function Details() {
                             </div>
                         </div>
                     </div>
-
                 </div>
 
 
@@ -60,11 +103,29 @@ function Details() {
                         </div>
                     </div>
 
+                    <div className="divider mt-5">Reviews</div>
+
+                    <form onSubmit={handleSubmit}>
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text badge mx-2 badge-accent">Tell us your thoughts</span>
+                            </label>
+                            <textarea name="comment" value={newReview.comment} onChange={(e) => handleChange(e)} className="textarea h-24 textarea-bordered textarea-primary" placeholder="About the product..."></textarea>
+                            <label>
+                                <span className="label-text badge mx-2 badge-primary">Out of 5 ⭐</span>
+                            </label>
+                            <input type="number" min="0" max="5" name="stars" placeholder="number of stars" value={newReview.stars} onChange={(e) => handleChange(e)} style={{width: '50px'}}/>
+                            <button type="submit" className="btn btn-accent" disabled={!newReview.comment}>Add your review</button>
+                        </div>
+                    </form>
+
+
+
                     <div className="flex flex-col w-full justify-center align-middle pt-5">
                         <div className="grid card bg-red-100 rounded-box place-items-center p-3">
 
                             <div className="grid grid-cols-2 align-middle">
-                                {review.msg === 'El prodcuto no tiene reviews' ? "This product hasn't been reviewed yet" : review.reviews?.map(r => (
+                                {review.msg ? "This product hasn't been reviewed yet" : review.reviews?.map(r => (
                                     <div className="my-2 ml-2">
                                         <div className="max-w-sm rounded-sm border border-gray-200 bg-white shadow-lg">
                                             <div className="text-right p-4">
@@ -73,10 +134,15 @@ function Details() {
 
                                             <div className="flex items-center relative mb-10">
                                                 <div className="border-t border-gray-200 z-20 w-full"></div>
-
                                             </div>
+
+                                            <div>
+                                                {"⭐".repeat(r.stars)}
+                                            </div>
+
+
                                             <div className="px-8 pb-4">
-                                                <h2 className="text-gray-800 text-xl font-bold">Featuring Gabo</h2>
+                                                <h2 className="text-gray-800 text-xl font-bold">Gabo's opininon-</h2>
                                                 <p className="text-gray-600 text-xs">
                                                     {r.comment}
                                                 </p>
@@ -92,8 +158,8 @@ function Details() {
             </div>
 
         </div>
-      
-  );
+
+    );
 }
 
 export default Details;

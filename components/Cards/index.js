@@ -11,7 +11,7 @@ const Cards = () => {
     return (
       <div className="p-5 grid grid-cols-2 lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 gap-5 align-middle">
         {data.map((e) => (
-          <Card key={e.id} id={e.id} name={e.name} price={e.price} img={e.picture.includes('...') ? '' : e.picture} />
+          <Card key={e.id} id={e.id} name={e.name} price={e.price} img={e.picture.includes('...') ? '' : e.picture} stock={e.stock} />
         ))}
       </div>
     );
@@ -21,7 +21,7 @@ const Cards = () => {
   const [currentPage, setcurrentPage] = useState(1);
   const [itemsPerPage, setitemsPerPage] = useState(10);
   const [pageNumberLimit, setpageNumberLimit] = useState(5);
-  const [maxPageNumberLimit, setmaxPageNumberLimit] = useState(5);
+  const [maxPageNumberLimit, setmaxPageNumberLimit] = useState(7);
   const [minPageNumberLimit, setminPageNumberLimit] = useState(0);
 
   useEffect(() => {
@@ -77,12 +77,12 @@ const Cards = () => {
 
   let pageIncrementBtn = null;
   if (pages.length > maxPageNumberLimit) {
-    pageIncrementBtn = <li onClick={handleNextbtn}> &hellip; </li>;
+    pageIncrementBtn = <li className="btn" onClick={handleNextbtn}> &hellip; </li>;
   }
 
   let pageDecrementBtn = null;
   if (minPageNumberLimit >= 1) {
-    pageDecrementBtn = <li onClick={handlePrevbtn}> &hellip; </li>;
+    pageDecrementBtn = <li className="btn" onClick={handlePrevbtn}> &hellip; </li>;
   }
 
   const handleLoadMore = () => {
@@ -110,11 +110,11 @@ const Cards = () => {
         >
           Next
         </button>
-        {/* <button 
+         {/* <button 
           onClick={handleLoadMore} 
           className="btn">
           Load More
-      </button> */}
+      </button>  */}
       </div>
     </div>
   );
