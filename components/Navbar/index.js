@@ -7,6 +7,12 @@ import Link from "next/link"
 import useCart from "../../hooks/useCart";
 
 
+function emailIsValid (email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+}
+
+
+
 const Navbar = () => {
   const dispatch = useDispatch();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -58,6 +64,7 @@ const Navbar = () => {
   }
   const handleSubmitSignup = (e) => {
     dispatch(signup(userSignup));
+    setFormData(true); 
   }
 
 
@@ -97,21 +104,22 @@ const Navbar = () => {
              </svg>
            </button>
          </div> 
-         <div className="flex-none">
-           <div className="avatar">
-             <div className="rounded-full w-10 h-10 m-2">
+         <div class="flex-none dropdown dropdown-left">
+           <div tabIndex="0" className="avatar">
+             <div class="rounded-full w-10 h-10 m-2">
                <img src="https://i.pravatar.cc/500?img=41"/>
              </div>
+             <ul tabIndex="0" className="p-2 shadow menu dropdown-content bg-base-100 rounded-box w-52">
+                <li>
+                  <a>Profile</a>
+                </li>
+                <li>
+                  <a
+                    onClick={logout}
+                  >Logout</a> 
+                </li>
+             </ul>
            </div>
-        </div>
-        <div className="flex-none">
-          <button 
-          className="btn btn-primary"
-          onClick={logout}
-          >
-          
-            LOGOUT
-          </button>
         </div>
           </>
           ) : (
@@ -235,6 +243,11 @@ const Navbar = () => {
                   name="mail"
                   onChange={handleChangeSignup}
                 />
+                {emailIsValid(userSignup.mail) === false && (
+                  <p className="text-red-500 mt-1 text-sm">
+                    *Please enter a valid email
+                  </p>
+                )}
                 <label className="label">
                   <span className="label-text font-bold">Password</span>
                 </label>
@@ -246,16 +259,19 @@ const Navbar = () => {
                   name="password"
                   onChange={handleChangeSignup}
                 />
-
+                {userSignup.password.length < 6 && (
+                  <p className="text-red-500 mt-1 text-sm">
+                    *Password must be at least 6 characters
+                  </p>
+                )}
                 <label
-                  htmlFor="my-modal-2"
                   className="btn mt-2"
-                  disabled={userSignup.username === "" || userSignup.password === "" || userSignup.name === "" || userSignup.lastName === "" || userSignup.mail === ""}
+                  disabled={userSignup.username === "" || userSignup.password.length < 6 || userSignup.name === "" || userSignup.lastName === "" || emailIsValid(userSignup.mail) === false}
                   onClick={handleSubmitSignup}
                 >
                   Sign Up
                 </label>
-                <label
+                {/* <label
                   htmlFor="my-modal-2"
                   className="btn bg-black  mt-2 hover:bg-white hover:text-black duration-150"
                 >
@@ -263,7 +279,7 @@ const Navbar = () => {
                     className="w-5 h-5 mr-2"
                     src="https://img.icons8.com/fluency/48/000000/google-logo.png"
                   /><a href="http://wines-db.herokuapp.com/auth/google">Sign up with Google</a>
-                </label>
+                </label> */}
               <p>You have an account? <button
               onClick={() => setFormData(true)}
               className="link link-secondary"
