@@ -98,7 +98,7 @@ export const getByCategory = (category) => async (dispatch) => {
 
 export const login = (user) => async (dispatch) => {
   try {
-    const response = await axios.post("http://wines-db.herokuapp.com/login", {
+    const response = await axios.post("https://wines-db.herokuapp.com/login", {
       username: user.username,
       password: user.password,
     });
