@@ -169,13 +169,12 @@ const Navbar = () => {
                     Login
                   </label>
                   <label
-                    htmlFor="my-modal-2"
                     className="btn bg-black  mt-2 hover:bg-white hover:text-black duration-150"
                   >
                     <img
                       className="w-5 h-5 mr-2"
                       src="https://img.icons8.com/fluency/48/000000/google-logo.png"
-                    /><a href="http://wines-db.herokuapp.com/auth/google">Login with Google</a>
+                    /><a href="https://wines-db.herokuapp.com/auth/google">Login with Google</a>
                   </label>
                 <p>You don't have an account? <button 
                 onClick={() => setFormData(false)}
