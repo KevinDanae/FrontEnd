@@ -1,8 +1,7 @@
 import React from "react";
+import Link from "next/link";
 
-const Product = ({ img, product, stock, price }) => {
-  
-
+const Product = ({ img, product, stock, price, description, brand, id }) => {
   return (
     <>
       <tr>
@@ -15,10 +14,7 @@ const Product = ({ img, product, stock, price }) => {
           <div className="flex items-center space-x-3">
             <div className="avatar">
               <div className="w-12 h-12 mask mask-squircle">
-                <img
-                  src={img}
-                  alt="Avatar Tailwind CSS Component"
-                />
+                <img src={img} alt="Avatar Tailwind CSS Component" />
               </div>
             </div>
             <div>
@@ -32,7 +28,11 @@ const Product = ({ img, product, stock, price }) => {
         </td>
         <td>{stock}</td>
         <th>
-          <button className="btn btn-ghost btn-xs">Edit</button>
+          <Link
+            href={`/dashboard/add?name=${product}&stock=${stock}&price=${price}&description=${description}&brand=${brand}&id=${id}`}
+          >
+            <p className="btn btn-ghost btn-xs">Edit</p>
+          </Link>
         </th>
       </tr>
     </>
