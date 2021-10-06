@@ -16,6 +16,7 @@ function emailIsValid (email) {
 const Navbar = () => {
   const dispatch = useDispatch();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const profile = useSelector((state => state.profile));
 
   const logout = () => {
     localStorage.removeItem("token");
@@ -67,7 +68,10 @@ const Navbar = () => {
     setFormData(true); 
   }
 
-
+  const handleSubmitSignupGoogle = (e) =>{
+    const googleLoginURL = "http://localhost:3001/auth/google"
+    const newWindow = window.open(googleLoginURL, '_self',);
+  }
 
   return (
     <>
@@ -107,7 +111,7 @@ const Navbar = () => {
          <div class="flex-none dropdown dropdown-left">
            <div tabIndex="0" className="avatar">
              <div class="rounded-full w-10 h-10 m-2">
-               <img src="https://i.pravatar.cc/500?img=41"/>
+               <img src={ profile.photo ? profile.photo : "https://i.pravatar.cc/500?img=41"}/>
              </div>
              <ul tabIndex="0" className="p-2 shadow menu dropdown-content bg-base-100 rounded-box w-52">
                 <li>
@@ -175,7 +179,8 @@ const Navbar = () => {
                     <img
                       className="w-5 h-5 mr-2"
                       src="https://img.icons8.com/fluency/48/000000/google-logo.png"
-                    /><a href="http://wines-db.herokuapp.com/auth/google">Login with Google</a>
+                    />
+                    <button onClick={(e) => handleSubmitSignupGoogle(e)} >Login with Google</button>
                   </label>
                 <p>You don't have an account? <button 
                 onClick={() => setFormData(false)}

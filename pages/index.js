@@ -1,7 +1,8 @@
 import { loadStripe } from "@stripe/stripe-js";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { addCart, getProducts } from "../actions";
+import { addCart, getProducts, signup } from "../actions";
+import Head from 'next/head'
 // import Filters from "../components/Filters";
 import useCart from "../hooks/useCart";
 import LandingPage from "../components/LandingPage";

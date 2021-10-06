@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addCart, getProducts } from "../actions";
+import { addCart, getProducts, getProfileGoogle } from "../actions";
 import Cards from "../components/Cards";
 import Filters from "../components/Filters";
 import Carousel from "../components/Carousel";
@@ -15,6 +15,9 @@ export default function Home() {
     dispatch(addCart());
   }, [token]);
 
+  useEffect(() => {
+    dispatch(getProfileGoogle())
+  },[])
   return (
     <main>
       <Navbar />

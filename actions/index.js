@@ -1,3 +1,4 @@
+import { data } from "autoprefixer";
 import axios from "axios";
 import { cartGet } from "../helpers/cart";
 
@@ -114,6 +115,21 @@ export const login = (user) => async (dispatch) => {
     console.log(err);
   }
 };
+
+export const getProfileGoogle = () => async (dispatch) => {
+  try {
+    let profile = await axios.get("http://localhost:3001/auth/profile", {withCredentials:true})
+    if(profile && profile.data){
+      localStorage.setItem("userId", profile.data.id);
+      return dispatch({
+        type: "PROFILEGOOGLE",
+        payload: profile.data,
+      })
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 export const addCart = (product) => async (dispatch) => {
   let array = [];

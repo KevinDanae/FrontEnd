@@ -1,4 +1,5 @@
 const initialState = {
+  profile: {},
   products: [],
   category: "",
   cart: [],
@@ -40,6 +41,11 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         token: action.payload,
+      };
+    case 'PROFILEGOOGLE':
+      return{
+        ...state,
+        profile: action.payload,
       };
     case "CHECKOUT_MERCADO_PAGO":
       return {
