@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 const Profile = () => {
     return (
  
@@ -12,10 +14,12 @@ const Profile = () => {
           </svg>
         </label>
       </div> 
-      <div class="flex-1 px-2 mx-2">
-        <span>
-              Menu
-            </span>
+      <div class="flex-1 px-2 mx-2 ">
+        <span className="text-lg font-bold cursor-pointer">
+          <Link href="/">
+              Wines
+          </Link>
+        </span>
       </div> 
       <div class="flex-none hidden lg:block">
         <ul class="menu horizontal">
