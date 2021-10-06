@@ -3,5 +3,5 @@ export const cartGet = async (userId) => {
     `https://wines-db.herokuapp.com/cart?userid=${userId}&state=activas`
   );
   const data = await response.json();
-  return data.products;
+  return data[0].products;
 };
