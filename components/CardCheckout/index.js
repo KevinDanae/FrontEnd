@@ -1,18 +1,28 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addCart, removeCart } from "../../actions";
+import useActionCart from "../../hooks/useActionCart";
 
 const CardCheckout = ({ product }) => {
   const [qt, setQt] = useState(product.q);
   const dispatch = useDispatch();
 
+  const actionCart = async (action, id) => {
+    const success = await useActionCart(id, action);
+    if (success) dispatch(addCart());
+  };
+
   const onHandleChange = (e) => {
     setQt(e.target.value);
 
     if (qt < product.q) {
-      dispatch(removeCart(product.id, true));
+      localStorage.getItem("token") && localStorage.getItem("idCart")
+        ? actionCart("remove", e.id)
+        : dispatch(removeCart(e.id, true));
     } else if (qt > product.q) {
-      dispatch(addCart({ id: product.id }));
+      localStorage.getItem("token") && localStorage.getItem("idCart")
+        ? actionCart("add", e.id)
+        : dispatch(addCart({ id: e.id }));
     }
   };
   return (
@@ -22,7 +32,7 @@ const CardCheckout = ({ product }) => {
           <td className="hidden pb-4 md:table-cell">
             <a href="#">
               <img
-                src={product.img}
+                src={product.img || product.image}
                 className="w-12 rounded"
                 alt="Thumbnail"
               />
@@ -34,7 +44,12 @@ const CardCheckout = ({ product }) => {
               <form action="" method="POST">
                 <button
                   className="text-gray-700 md:ml-4"
-                  onClick={() => dispatch(removeCart(product.id))}
+                  onClick={() =>
+                    localStorage.getItem("token") &&
+                    localStorage.getItem("idCart")
+                      ? actionCart("remove", product.id)
+                      : dispatch(removeCart(product.id))
+                  }
                 >
                   <small>(Remove item)</small>
                 </button>
@@ -47,7 +62,7 @@ const CardCheckout = ({ product }) => {
                 <input
                   type="number"
                   onChange={onHandleChange}
-                  value={product.q}
+                  value={product.quantity}
                   className="w-full font-semibold text-center text-gray-700 bg-gray-200 outline-none focus:outline-none hover:text-black focus:text-black"
                 />
               </div>
@@ -60,7 +75,7 @@ const CardCheckout = ({ product }) => {
           </td>
           <td className="text-right">
             <span className="text-sm lg:text-base font-medium">
-              ${(product.price * product.q).toFixed(2)}
+              ${(product.price * product.quantity).toFixed(2)}
             </span>
           </td>
         </tr>

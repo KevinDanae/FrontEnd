@@ -11,7 +11,7 @@ const Checkout = ({ cart }) => {
   const paypal = useSelector(state => state.checkoutPaypal);
   let total = 0;
   cart.forEach((e) => {
-    total = total + e.priceDis * e.q;
+    total = total + e.price * e.quantity;
   });
   useEffect(() => {
     dispatch(checkoutMercadoPago(total));

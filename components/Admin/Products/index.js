@@ -42,10 +42,13 @@ const Products = () => {
               state.map((e) => (
                 <Product
                   key={e.id}
+                  id={e.id}
                   img={e.picture}
                   product={e.name}
                   stock={e.stock}
                   price={e.price}
+                  description={e.description}
+                  brand={e.brand}
                 />
               ))}
           </tbody>
