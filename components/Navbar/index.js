@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { login, signup } from "../../actions"
 import Link from "next/link"
 import useCart from "../../hooks/useCart";
+import Profile from "../../pages/profile";
 
 
 function emailIsValid (email) {
@@ -111,7 +112,7 @@ const Navbar = () => {
              </div>
              <ul tabIndex="0" className="p-2 shadow menu dropdown-content bg-base-100 rounded-box w-52">
                 <li>
-                  <a>Profile</a>
+                  <Link href="/profile">Profile</Link>
                 </li>
                 <li>
                   <a

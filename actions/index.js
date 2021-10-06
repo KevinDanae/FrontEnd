@@ -46,10 +46,9 @@ export const signup = (userSignup) => async (dispatch) => {
 
 export const checkoutMercadoPago = (total) => async (dispatch) => {
   try{
-    const userId = localStorage.getItem("userId");
     const response = await axios.post("https://wines-db.herokuapp.com/mepa/get-payment", {
     price: total,
-    orderid: userId
+    orderid: localStorage.getItem("idCart"),
     });
     const data = await response.data;
     console.log = data;
@@ -66,9 +65,8 @@ export const checkoutMercadoPago = (total) => async (dispatch) => {
 export const checkoutPaypal = (total) => async (dispatch) => {
   try{
     const response = await axios.post("https://wines-db.herokuapp.com/paypal/get-payment", {
-      currency_code: "usd",
       value: Math.floor(total/186),
-      orderid: "1"
+      orderid: localStorage.getItem("idCart")
     });
     const data = await response.data;
     console.log = data;
