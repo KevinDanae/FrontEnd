@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { login, signup } from "../../actions"
 import Link from "next/link"
 import useCart from "../../hooks/useCart";
+import Profile from "../../pages/profile";
 
 
 function emailIsValid (email) {
@@ -23,7 +24,7 @@ const Navbar = () => {
   };
 
   const tokenRedux = useSelector(state => state.token);
-
+  const cartState = useSelector(state => state.cart)
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
@@ -85,7 +86,7 @@ const Navbar = () => {
         </div>
         <div className="flex-none px-2 lg:flex md:flex sm:flex navbar-end">
           <div className="dropdown dropdown-hover dropdown-left">
-            <button className="btn btn-square px-8 btn-ghost mr-2 ">
+            <button className={!cartState ? "btn btn-square px-8 btn-ghost mr-2" : "btn btn-square px-8 btn-warning mr-2 se"} >
               Cart
             </button>
             <div
@@ -111,7 +112,7 @@ const Navbar = () => {
              </div>
              <ul tabIndex="0" className="p-2 shadow menu dropdown-content bg-base-100 rounded-box w-52">
                 <li>
-                  <a>Profile</a>
+                  <Link href="/profile">Profile</Link>
                 </li>
                 <li>
                   <a
