@@ -1,50 +1,44 @@
 import Link from 'next/link'
+import { useState } from 'react';
+import Account  from '../components/Account'
+import Purchases from '../components/Purchases'
+import Navbar from '../components/Navbar';
 
 const Profile = () => {
+  const [view, setView] = useState(true)
+  
+
+  const handleAccount = () => {
+    setView(true)
+  }
+  const handlePurchases = () => {
+    setView(false)
+  }
+
+
+
     return (
- 
-<div class="rounded-lg shadow bg-base-200 drawer h-52">
-  <input id="my-drawer-3" type="checkbox" class="drawer-toggle"/> 
-  <div class="flex flex-col drawer-content">
-    <div class="w-full navbar bg-base-300">
-      <div class="flex-none lg:hidden">
-        <label for="my-drawer-3" class="btn btn-square btn-ghost">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-6 h-6 stroke-current">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-          </svg>
-        </label>
-      </div> 
-      <div class="flex-1 px-2 mx-2 ">
-        <span className="text-lg font-bold cursor-pointer">
-          <Link href="/">
-              Wines
-          </Link>
-        </span>
-      </div> 
-      <div class="flex-none hidden lg:block">
-        <ul class="menu horizontal">
-          <li>
-            <a class="rounded-btn">My purchases</a>
-          </li> 
-          <li>
-            <a class="rounded-btn">My account</a>
-          </li>
-        </ul>
-      </div>
-    </div>
+<>
+<Navbar />
+<div class=" drawer drawer-mobile h-screen">
+  <input id="my-drawer-2" type="checkbox" class="drawer-toggle"/> 
+  <div class="flex flex-col items-center justify-center drawer-content">
+    <label for="my-drawer-2" class="mt-4 mb-4 btn btn-primary drawer-button lg:hidden ">Menu</label> 
+    {view ? <Account /> : <Purchases/>}
   </div> 
   <div class="drawer-side">
-    <label for="my-drawer-3" class="drawer-overlay"></label> 
-    <ul class="p-4 overflow-y-auto menu w-80 bg-base-100">
+    <label for="my-drawer-2" class="drawer-overlay"></label> 
+    <ul class="menu p-4 overflow-y-auto w-80 bg-primary text-white">
       <li>
-        <a>Item 1</a>
+        <a onClick={handleAccount}>Account</a>
       </li> 
       <li>
-        <a>Item 2</a>
+        <a onClick={handlePurchases}>My purchases</a>
       </li>
     </ul>
   </div>
 </div>
+</>
     )
 }
 
