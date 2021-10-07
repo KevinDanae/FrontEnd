@@ -101,11 +101,12 @@ export const login = (user) => async (dispatch) => {
     });
     const data = await response.data;
     //guardar token en localstorage
-    localStorage.setItem("token", data.token);
+    console.log(data)
+    localStorage.setItem("token", JSON.stringify(data.user));
     localStorage.setItem("userId", data.user.id);
     return dispatch({
       type: "LOGIN",
-      payload: data.token,
+      payload: data.user,
     });
   } catch (err) {
     console.log(err);
