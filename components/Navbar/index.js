@@ -72,7 +72,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="navbar mb-10 shadow-md">
+      <div className="navbar shadow-md">
         <div className="flex-1 px-2 mx-2 navbar-start">
           <Link href="/">
             <span className="text-lg font-bold cursor-pointer">

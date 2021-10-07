@@ -113,6 +113,25 @@ export const login = (user) => async (dispatch) => {
   }
 };
 
+export const resetPassword = (password, mail) => async (dispatch) => {
+  try {
+    const response = await axios.put("https://wines-db.herokuapp.com/password/resetPassword", {
+      email: mail,
+      newPassword: password,
+    });
+    const data = await response.data;
+    console.log(data)
+    return dispatch({
+      type: "RESET_PASSWORD",
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+
+
+
 export const addCart = (product) => async (dispatch) => {
   let array = [];
   if (localStorage.getItem("idCart") && localStorage.getItem("token")) {
