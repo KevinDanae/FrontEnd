@@ -11,7 +11,14 @@ const Purchases = () => {
 
     return (
         <div className="flex flex-col">
-            Hola
+            <h1 className="font-bold text-3xl">Hi {purchasesList.name}! this is your purchases list</h1>
+            {purchasesList.purchases ? purchasesList.purchases.map(purchase => (
+                <div className="flex flex-col mb-4" key={purchase.id}>
+                    <h2 className="font-bold text-2xl">{purchase.name}</h2>
+                    <p>{purchase.description}</p>
+                </div>
+            )) : <p className="font-bold text-xl mt-4">Now you have no purchases made</p>
+            }
         </div>
     )
 }

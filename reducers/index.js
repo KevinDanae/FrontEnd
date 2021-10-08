@@ -7,10 +7,16 @@ const initialState = {
   checkoutPaypal: "",
   purchases: "",
   userData: "",
+  resetPassword: "",
 };
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
+    case "RESET_PASSWORD":
+      return {
+        ...state,
+        resetPassword: action.payload,
+      };
     case "USER_DATA":
       return {
         ...state,

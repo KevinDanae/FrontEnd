@@ -134,6 +134,7 @@ export const resetPassword = (password, mail) => async (dispatch) => {
     console.log(data)
     return dispatch({
       type: "RESET_PASSWORD",
+      payload: data,
     });
   } catch (err) {
     console.log(err);
@@ -186,7 +187,10 @@ export const addCart = (product) => async (dispatch) => {
 
 export const userData = () => async (dispatch) => {
   let data = localStorage.getItem("token")
-  data = JSON.parse(data)
+  if (data) {
+    data = JSON.parse(data);
+  }
+  
     dispatch({
       type: "USER_DATA",
       payload: data,
