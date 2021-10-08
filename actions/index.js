@@ -12,7 +12,7 @@ export const getProducts = () => async (dispatch) => {
 };
 
 export const purchases = (id) => async (dispatch) => {
-  const data = await fetch(`https://wines-db.herokuapp.com/cart?userId=${id}`);
+  const data = await fetch(`https://wines-db.herokuapp.com/cart?userid=${id}`);
   const info = await data.json()
   console.log(info)
   dispatch({
