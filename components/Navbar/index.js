@@ -75,7 +75,7 @@ const Navbar = () => {
         <div className="flex-1 px-2 mx-2 navbar-start">
           <Link href="/">
             <span className="text-lg font-bold cursor-pointer">
-              <i className="fas fa-user-md pr-3"></i>Wines
+              <i className="fas fa-user-md pr-3"></i>Empedocles
             </span>
           </Link>
         </div>

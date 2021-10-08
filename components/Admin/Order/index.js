@@ -38,7 +38,11 @@ const Order = ({ name, email, order, status }) => {
             <div className="avatar">
               <div className="w-12 h-12 mask mask-squircle">
                 <img
-                  src="https://i.pravatar.cc/500?img=41"
+                  src={
+                    name === "Admin"
+                      ? "https://i.pinimg.com/originals/0e/e2/33/0ee233a2c2254ee7e6b8d7afd98d4025.jpg"
+                      : "https://i.pravatar.cc/500?img=41"
+                  }
                   alt="Avatar Tailwind CSS Component"
                 />
               </div>
