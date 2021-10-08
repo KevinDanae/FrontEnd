@@ -4,11 +4,7 @@ import { resetPassword, userData } from "../../actions";
 const Account = () => {
     const dispatch = useDispatch();
     const infoRedux = useSelector(state => state.userData);
-    const [user, setUser] = useState({
-            name: infoRedux.name,
-            lastname: infoRedux.lastname,
-            mail: infoRedux.mail,
-        });
+ 
     useEffect(() => {
             dispatch(userData())
     }, [])
@@ -20,11 +16,10 @@ const Account = () => {
     const handleSubmitPassword = (e) => {
         e.preventDefault();
         setPasswordForm(true);
-        setOpen(true); 
     }
     const handleClick = (e) => {
         setPasswordForm(false)
-        dispatch(resetPassword(password, user.mail))
+        dispatch(resetPassword(password, infoRedux.mail))
     }
    
 
@@ -33,8 +28,8 @@ const Account = () => {
         {passwordForm ? (
         <div className="flex flex-col rounded gap-2 text-center bg-primary p-8 text-white">
         <h1 className="font-bold">My profile</h1>
-        {<h3>{user.name} {user.lastname}</h3>}
-        {<h3>{user.mail}</h3>}
+        {<h3>{infoRedux.name} {infoRedux.lastname}</h3>}
+        {<h3>{infoRedux.mail}</h3>}
         <p>You forgot your password?</p>
         <button className="link link-accent"  onClick={handleClick}>Change password</button>
         </div>
