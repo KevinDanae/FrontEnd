@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import Link from "next/link";
-import { addCart } from "../../actions";
+import { addCart, wishList } from "../../actions";
 import useActionCart from "../../hooks/useActionCart";
 
 const Card = ({ price, name, img, discount, id, stock }) => {
@@ -50,7 +50,10 @@ const Card = ({ price, name, img, discount, id, stock }) => {
           >
             {stock ? "Add to Cart" : "Sold Out"}
           </button>
-          <button className="py-3 pl-3 w-3/12 bg-white rounded-br-xl text-yellow-400 font-extrabold flex justify-center">
+          <button
+            onClick={() => dispatch(wishList({ id, img, price, name }))}
+            className="py-3 pl-3 w-3/12 bg-white rounded-br-xl text-yellow-400 font-extrabold flex justify-center"
+          >
             <svg
               width="24"
               height="24"

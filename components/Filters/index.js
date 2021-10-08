@@ -20,7 +20,7 @@ const Filters = () => {
   };
 
   return (
-    <div className="flex justify-center sm:bg-black -mt-11 lg:bg-white">
+    <div className="flex justify-center sm:bg-black  lg:bg-white">
       <div className="navbar sm:bg-black lg:bg-white text-black-content rounded-box">
         <div className="hidden px-2 mx-2 navbar-center lg:flex">
           <div className="flex items-stretch">

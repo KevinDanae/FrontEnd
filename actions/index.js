@@ -45,37 +45,41 @@ export const signup = (userSignup) => async (dispatch) => {
 };
 
 export const checkoutMercadoPago = (total) => async (dispatch) => {
-  try{
-    const response = await axios.post("https://wines-db.herokuapp.com/mepa/get-payment", {
-    price: total,
-    orderid: localStorage.getItem("idCart"),
-    });
+  try {
+    const response = await axios.post(
+      "https://wines-db.herokuapp.com/mepa/get-payment",
+      {
+        price: total,
+        orderid: localStorage.getItem("idCart"),
+      }
+    );
     const data = await response.data;
     console.log = data;
     return dispatch({
       type: "CHECKOUT_MERCADO_PAGO",
       payload: data,
     });
-  }
-  catch(err){
+  } catch (err) {
     console.log(err);
   }
 };
 
 export const checkoutPaypal = (total) => async (dispatch) => {
-  try{
-    const response = await axios.post("https://wines-db.herokuapp.com/paypal/get-payment", {
-      value: Math.floor(total/186),
-      orderid: localStorage.getItem("idCart")
-    });
+  try {
+    const response = await axios.post(
+      "https://wines-db.herokuapp.com/paypal/get-payment",
+      {
+        value: Math.floor(total / 186),
+        orderid: localStorage.getItem("idCart"),
+      }
+    );
     const data = await response.data;
     console.log = data;
     return dispatch({
       type: "CHECKOUT_PAYPAL",
       payload: data,
     });
-  }
-  catch(err){
+  } catch (err) {
     console.log(err);
   }
 };
@@ -101,7 +105,7 @@ export const login = (user) => async (dispatch) => {
     });
     const data = await response.data;
     //guardar token en localstorage
-    console.log(data)
+    console.log(data);
     localStorage.setItem("token", JSON.stringify(data.user));
     localStorage.setItem("userId", data.user.id);
     return dispatch({
@@ -115,12 +119,15 @@ export const login = (user) => async (dispatch) => {
 
 export const resetPassword = (password, mail) => async (dispatch) => {
   try {
-    const response = await axios.put("https://wines-db.herokuapp.com/password/resetPassword", {
-      email: mail,
-      newPassword: password,
-    });
+    const response = await axios.put(
+      "https://wines-db.herokuapp.com/password/resetPassword",
+      {
+        email: mail,
+        newPassword: password,
+      }
+    );
     const data = await response.data;
-    console.log(data)
+    console.log(data);
     return dispatch({
       type: "RESET_PASSWORD",
     });
@@ -128,9 +135,6 @@ export const resetPassword = (password, mail) => async (dispatch) => {
     console.log(err);
   }
 };
-
-
-
 
 export const addCart = (product) => async (dispatch) => {
   let array = [];
@@ -196,5 +200,45 @@ export const removeCart = (id, removeOne) => async (dispatch) => {
   dispatch({
     type: "REMOVE_CART",
     payload: array,
+  });
+};
+
+export const wishList = (product, del) => (dispatch) => {
+  let wish = [];
+  if (!product) {
+    wish = localStorage.getItem("wish");
+    if(wish) {
+      wish = JSON.parse(wish);
+
+    } else {
+      wish = []
+    }
+  } else {
+    if (del) {
+      wish = localStorage.getItem("wish");
+      wish = JSON.parse(wish);
+      wish = wish.filter((e) => e.id !== product.id);
+      if(!wish.lenght) {
+        localStorage.removeItem('wish')
+      } else {
+        localStorage.setItem("wish", JSON.stringify(wish));
+      }
+    } else {
+      if (!localStorage.getItem("wish")) {
+        wish.push(product);
+        localStorage.setItem("wish", JSON.stringify(wish));
+      } else {
+        wish = JSON.parse(localStorage.getItem("wish"));
+        wish.forEach( e => {
+          if(e.id === product.id) return
+          wish.push(product)
+        })
+        localStorage.setItem("wish", JSON.stringify(wish));
+      }
+    }
+  }
+  dispatch({
+    type: "WISH",
+    payload: wish,
   });
 };
