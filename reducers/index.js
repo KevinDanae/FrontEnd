@@ -5,11 +5,30 @@ const initialState = {
   token: "",
   checkoutMercadoPago: "",
   checkoutPaypal: "",
+  purchases: "",
+  userData: "",
+  resetPassword: "",
   wish: [],
 };
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
+    case "RESET_PASSWORD":
+      return {
+        ...state,
+        resetPassword: action.payload,
+      };
+    case "USER_DATA":
+      return {
+        ...state,
+        purchases: action.payload,
+      };
+    case "PURCHASES":
+      return {
+        ...state,
+        purchases: action.payload,
+      };
+
     case "GET_PRODUCTS":
       return {
         ...state,

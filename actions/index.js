@@ -11,6 +11,17 @@ export const getProducts = () => async (dispatch) => {
   });
 };
 
+export const purchases = (id) => async (dispatch) => {
+  const data = await fetch(`https://wines-db.herokuapp.com/cart?userId=${id}`);
+  const info = await data.json()
+  console.log(info)
+  dispatch({
+    type: "PURCHASES",
+    payload: info,
+    });
+}
+
+
 export const getByName = (name) => async (dispatch) => {
   const data = await fetch(
     `https://wines-db.herokuapp.com/product?name=${name}`
@@ -130,6 +141,7 @@ export const resetPassword = (password, mail) => async (dispatch) => {
     console.log(data);
     return dispatch({
       type: "RESET_PASSWORD",
+      payload: data,
     });
   } catch (err) {
     console.log(err);
@@ -176,6 +188,19 @@ export const addCart = (product) => async (dispatch) => {
     payload: array,
   });
 };
+
+export const userData = () => async (dispatch) => {
+  let data = localStorage.getItem("token")
+  if (data) {
+    data = JSON.parse(data);
+  }
+  
+    dispatch({
+      type: "USER_DATA",
+      payload: data,
+    });
+}
+
 
 export const removeCart = (id, removeOne) => async (dispatch) => {
   let array = [];

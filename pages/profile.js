@@ -6,16 +6,12 @@ import Navbar from '../components/Navbar';
 
 const Profile = () => {
   const [view, setView] = useState(true)
-  
-
   const handleAccount = () => {
     setView(true)
   }
   const handlePurchases = () => {
     setView(false)
   }
-
-
 
     return (
 <>
