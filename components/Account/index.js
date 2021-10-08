@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { resetPassword, userData } from "../../actions";
-
 const Account = () => {
     const dispatch = useDispatch();
     const infoRedux = useSelector(state => state.purchases);
@@ -21,12 +20,13 @@ const Account = () => {
     const handleSubmitPassword = (e) => {
         e.preventDefault();
         setPasswordForm(true);
+        setOpen(true); 
     }
     const handleClick = (e) => {
         setPasswordForm(false)
-        dispatch(resetPassword(password, user.mail));   
+        dispatch(resetPassword(password, user.mail))
     }
-
+   
 
     return (
         <>
@@ -47,7 +47,11 @@ const Account = () => {
                     *Password must be at least 6 characters
                   </p>
                 )}
-                <button className="btn " onClick={handleSubmitPassword}>CHANGE</button>
+                <button 
+                className="btn "
+                disabled={password.length < 6}
+                onClick={handleSubmitPassword}
+                >CHANGE</button>
             </div>
         )}
         </>
