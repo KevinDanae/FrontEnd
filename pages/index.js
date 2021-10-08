@@ -7,6 +7,7 @@ import useCart from "../hooks/useCart";
 import LandingPage from "../components/LandingPage";
 import Navbar from "../components/Navbar";
 import useActionCart from "../hooks/useActionCart";
+import Footer from "../components/Footer";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -36,6 +37,7 @@ export default function Home() {
     <main>
       <Navbar />
       <LandingPage />
+      <Footer />
     </main>
   );
 }

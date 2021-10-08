@@ -5,6 +5,8 @@ import Cards from "../components/Cards";
 import Filters from "../components/Filters";
 import Carousel from "../components/Carousel";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+
 
 export default function Home() {
   const token = useSelector((state) => state.token);
@@ -21,6 +23,7 @@ export default function Home() {
       <Filters />
       <Carousel />
       <Cards />
+      <Footer />
     </main>
   );
 }
