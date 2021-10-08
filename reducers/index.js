@@ -21,7 +21,7 @@ const rootReducer = (state = initialState, action) => {
     case "USER_DATA":
       return {
         ...state,
-        purchases: action.payload,
+        userData: action.payload,
       };
     case "PURCHASES":
       return {

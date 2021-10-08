@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { resetPassword, userData } from "../../actions";
 const Account = () => {
     const dispatch = useDispatch();
-    const infoRedux = useSelector(state => state.purchases);
+    const infoRedux = useSelector(state => state.userData);
     const [user, setUser] = useState({
             name: infoRedux.name,
             lastname: infoRedux.lastname,
