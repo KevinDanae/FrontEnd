@@ -22,7 +22,7 @@ const Cart = () => {
   let name = "";
   const images = [];
   cart?.map((e) => {
-    total = total + e.products_carts.quantity * e.price;
+    total = total +  (e.quantity || e.products_carts.quantity) * e.price;
     name = name + e.name + ` x${e.quantity}` + ", ";
     images.push(e.picture || e.img);
   });
@@ -46,7 +46,7 @@ const Cart = () => {
                   <div className="font-bold">{e.name}</div>
                   <div className="truncate">Product 1 description</div>
                   <div className="text-gray-400">
-                    Qty: {e.q || e.products_carts.quantity}
+                    Qty: {e.quantity || e.products_carts.quantity}
                     <button
                       className="ml-3 w-4 h-4 align-middle hover:bg-red-200 rounded-full cursor-pointer text-red-700"
                       onClick={() =>
