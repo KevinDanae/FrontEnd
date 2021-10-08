@@ -8,6 +8,7 @@ const initialState = {
   purchases: "",
   userData: "",
   resetPassword: "",
+  wish: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -55,7 +56,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         cart: action.payload,
       };
-    case "LOGIN": 
+    case "LOGIN":
       return {
         ...state,
         token: action.payload,
@@ -64,14 +65,19 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         checkoutMercadoPago: action.payload,
-      }
-      default:
-      return state;
+      };
     case "CHECKOUT_PAYPAL":
       return {
         ...state,
         checkoutPaypal: action.payload,
-      }
+      };
+    case "WISH":
+      return {
+        ...state,
+        wish: action.payload,
+      };
+    default:
+      return state;
   }
 };
 

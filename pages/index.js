@@ -1,12 +1,13 @@
 import { loadStripe } from "@stripe/stripe-js";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { addCart, getProducts } from "../actions";
+import { addCart, getProducts, wishList } from "../actions";
 // import Filters from "../components/Filters";
 import useCart from "../hooks/useCart";
 import LandingPage from "../components/LandingPage";
 import Navbar from "../components/Navbar";
 import useActionCart from "../hooks/useActionCart";
+import Footer from "../components/Footer";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -30,12 +31,14 @@ export default function Home() {
   useEffect(() => {
     dispatch(getProducts());
     dispatch(addCart());
+    dispatch(wishList())
   }, []);
 
   return (
     <main>
       <Navbar />
       <LandingPage />
+      <Footer />
     </main>
   );
 }
