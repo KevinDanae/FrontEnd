@@ -1,4 +1,5 @@
 import React from "react";
+import Link from 'next/link';
 import Orders from "../Orders";
 
 const Sidebar = ({render}) => {
@@ -10,16 +11,16 @@ const Sidebar = ({render}) => {
       <div className="flex flex-row h-full">
         <nav className="bg-gray-900 w-20  justify-between flex flex-col ">
           <div className="mt-10 mb-10">
-            <a href="#">
+            <Link href="/dashboard">
               <img
-                src="https://randomuser.me/api/portraits/women/76.jpg"
+                src="https://i.pinimg.com/originals/0e/e2/33/0ee233a2c2254ee7e6b8d7afd98d4025.jpg"
                 className="rounded-full w-10 h-10 mb-3 mx-auto"
               />
-            </a>
+            </Link>
             <div className="mt-10">
               <ul>
                 <li className="mb-6">
-                  <a href="#">
+                  <Link href="/dashboard">
                     <span>
                       <svg
                         className="fill-current h-5 w-5 text-gray-300 mx-auto hover:text-green-500 "
@@ -35,10 +36,10 @@ const Sidebar = ({render}) => {
                         />
                       </svg>
                     </span>
-                  </a>
+                  </Link>
                 </li>
                 <li className="mb-6">
-                  <a href="#">
+                  <Link href="/dashboard/add">
                     <span>
                       <svg
                         className="fill-current h-5 w-5 mx-auto text-gray-300 hover:text-green-500"
@@ -51,10 +52,10 @@ const Sidebar = ({render}) => {
                         ></path>
                       </svg>
                     </span>
-                  </a>
+                  </Link>
                 </li>
                 <li className="mb-6">
-                  <a href="#">
+                  <Link href="/dashboard/products">
                     <span>
                       <svg
                         className="fill-current h-5 w-5 text-gray-300 mx-auto hover:text-green-500"
@@ -67,10 +68,10 @@ const Sidebar = ({render}) => {
                         ></path>
                       </svg>
                     </span>
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="#">
+                  <Link href="/dashboard/addCategory">
                     <span>
                       <svg
                         className="fill-current h-5 w-5 text-gray-300 mx-auto hover:text-green-500"
@@ -92,7 +93,7 @@ const Sidebar = ({render}) => {
                         />
                       </svg>
                     </span>
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
