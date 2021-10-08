@@ -2,7 +2,7 @@ import React from "react";
 import { useRouter } from "next/router";
 import useId from "../../hooks/useId";
 import { useDispatch } from "react-redux";
-import { addCart, getProducts } from "../../actions";
+import { addCart, getProducts, wishList } from "../../actions";
 import Navbar from "../../components/Navbar";
 import { useState } from "react";
 import { useEffect } from "react";
@@ -14,6 +14,7 @@ function Details() {
   useEffect(() => {
     dispatch(getProducts());
     dispatch(addCart());
+    dispatch(wishList())
   }, []);
 
   const router = useRouter();
