@@ -1,16 +1,18 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { resetPassword } from "../../actions";
-
+import { resetPassword, userData } from "../../actions";
 
 const Account = () => {
     const dispatch = useDispatch();
-    const infoRedux = useSelector(state => state.token);
-        const [user, setUser] = useState({
+    const infoRedux = useSelector(state => state.userData);
+    const [user, setUser] = useState({
             name: infoRedux.name,
             lastname: infoRedux.lastname,
             mail: infoRedux.mail,
         });
+    useEffect(() => {
+            dispatch(userData())
+    }, [])
     const [passwordForm, setPasswordForm] = useState(true);
     const [password, setPassword] = useState("")
     const handleChangePassword = (e) => {
