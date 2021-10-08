@@ -6,6 +6,7 @@ import { addCart, getProducts } from "../../actions";
 import Navbar from "../../components/Navbar";
 import { useState } from "react";
 import { useEffect } from "react";
+import Footer from "../../components/Footer";
 
 function Details() {
   const dispatch = useDispatch();
@@ -59,7 +60,7 @@ function Details() {
     });
   };
 
-  console.log(Details);
+  console.log(product);
 
   return (
     <div>
@@ -108,8 +109,7 @@ function Details() {
           <div className="flex flex-col w-full justify-center align-middle">
             <div className="grid h-20 card bg-red-100 rounded-box place-items-center">
               <h6>Category: Red</h6>
-              <h6>Brand: Vino</h6>
-              <h6>Tag: Merlot</h6>
+              <h6>Brand: {product.brand}</h6>
             </div>
             <div className="divider">Making of the wine</div>
             <div className="grid card bg-red-100 rounded-box place-items-center p-3">
@@ -175,21 +175,20 @@ function Details() {
                   : review.reviews?.map((r) => (
                       <div className="my-2 ml-2">
                         <div className="max-w-sm rounded-sm border border-gray-200 bg-white shadow-lg">
-                          <div className="text-right p-4">
-                            <span className="text-xs text-gray-500 tracking-widest uppercase">
-                              few weeks ago
-                            </span>
-                          </div>
+                          {/* <div className="text-right p-4">
+                          <span className="text-xs text-gray-500 tracking-widest uppercase">
+                            few weeks ago
+                          </span>
+                        </div> */}
 
                           <div className="flex items-center relative mb-10">
                             <div className="border-t border-gray-200 z-20 w-full"></div>
                           </div>
 
-                          <div>{"⭐".repeat(r.stars)}</div>
-
                           <div className="px-8 pb-4">
                             <h2 className="text-gray-800 text-xl font-bold">
-                              Gabo's opininon-
+                              <div>{"⭐".repeat(r.stars)}</div>
+                              {r.userId ? r.userId.name : "Gabo"}
                             </h2>
                             <p className="text-gray-600 text-xs">{r.comment}</p>
                           </div>
@@ -201,6 +200,7 @@ function Details() {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

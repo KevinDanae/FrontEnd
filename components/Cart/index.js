@@ -20,10 +20,10 @@ const Cart = () => {
   let total = 0;
   let name = "";
   const images = [];
-  cart.map((e) => {
-    total = total + e.quantity * e.price;
+  cart?.map((e) => {
+    total = total + e.products_carts.quantity * e.price;
     name = name + e.name + ` x${e.quantity}` + ", ";
-    images.push(e.image || e.img);
+    images.push(e.picture || e.img);
   });
 
   return (
@@ -37,13 +37,13 @@ const Cart = () => {
                 className="p-2 flex bg-base-200 hover:bg-gray-100 cursor-pointer border-b border-gray-100"
               >
                 <div className="p-2 w-12">
-                  <img src={e.img || e.image} alt="img product" />
+                  <img src={e.img || e.picture} alt="img product" />
                 </div>
                 <div className="flex-auto text-sm w-32">
                   <div className="font-bold">{e.name}</div>
                   <div className="truncate">Product 1 description</div>
                   <div className="text-gray-400">
-                    Qty: {e.q || e.quantity}
+                    Qty: {e.q || e.products_carts.quantity}
                     <button
                       className="ml-3 w-4 h-4 align-middle hover:bg-red-200 rounded-full cursor-pointer text-red-700"
                       onClick={() =>
