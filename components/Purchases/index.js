@@ -17,6 +17,7 @@ const Purchases = () => {
                 <div className="flex flex-col mb-4" key={product.id}>
                     <h2 className="font-bold text-2xl">{product.name}</h2>
                     <p>{product.price}</p>
+                    <p>{purchase.status}</p>
                 </div>
                 ))
             )) : <p className="font-bold text-xl mt-4">Now you have no purchases made</p>
