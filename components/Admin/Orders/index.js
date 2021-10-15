@@ -39,7 +39,7 @@ const Orders = () => {
                   name={e.user ? e.user.name : "Pruebas"}
                   order={e.createdAt}
                   status={e.state}
-                  email="kevin.lovo@gmail.com"
+                  email="kevin.danaea@gmail.com"
                 />
               ))}
           </tbody>
